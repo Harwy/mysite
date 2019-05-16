@@ -10,7 +10,11 @@ class LikeCount(models.Model):
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
 
-    liked_num = models.IntegerField(default=0)
+    liked_num = models.IntegerField(default=0, verbose_name='点赞数')
+
+    class Meta:
+        verbose_name = '点赞总计'
+        verbose_name_plural = verbose_name
 
 
 '''点赞具体'''
@@ -19,5 +23,9 @@ class LikeRecord(models.Model):
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
 
-    user = models.ForeignKey(User, on_delete=models.CASCADE)  # 点赞人
-    like_time = models.DateTimeField(auto_now_add=True)  # 点赞时间
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='点赞对象')  # 点赞人
+    like_time = models.DateTimeField(auto_now_add=True, verbose_name='点赞时间')  # 点赞时间
+
+    class Meta:
+        verbose_name = '单篇点赞数总计'
+        verbose_name_plural = verbose_name

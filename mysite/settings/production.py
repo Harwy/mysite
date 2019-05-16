@@ -13,8 +13,6 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 import os
 from .base import *
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
@@ -68,7 +66,7 @@ ADMINS = (
 
 # 日志文件
 LOGGING = {
-    'version': 1,
+   'version': 1,
     'disable_existing_loggers': False,
     'handlers': {
         'file': {

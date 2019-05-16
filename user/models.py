@@ -9,6 +9,10 @@ class Profile(models.Model):
     def __str__(self):
         return '<Profile>: %s for %s' % (self.nickname, self.user.username)
 
+    class Meta:
+        verbose_name = '昵称库'
+        verbose_name_plural = verbose_name
+
 
 # 动态绑定nickname
 def get_nickname(self):

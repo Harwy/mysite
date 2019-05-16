@@ -33,8 +33,8 @@ class Comment(models.Model):
     object_id = models.PositiveIntegerField()
     content_object = GenericForeignKey('content_type', 'object_id')
 
-    text = models.TextField()  # 评论内容
-    comment_time = models.DateTimeField(auto_now_add=True)  # 提交时间
+    text = models.TextField(verbose_name='评论内容')  # 评论内容
+    comment_time = models.DateTimeField(auto_now_add=True, verbose_name='提交评论时间')  # 提交时间
     user = models.ForeignKey(User, related_name="comments", on_delete=models.CASCADE)
 
     root = models.ForeignKey('self', related_name='root_comment', null=True, on_delete=models.CASCADE)  # 当前评论对应的母对象
@@ -64,3 +64,5 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ['comment_time']
+        verbose_name = '评论库'
+        verbose_name_plural = verbose_name
