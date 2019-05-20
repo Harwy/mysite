@@ -87,3 +87,12 @@ def blog_detail(request, blog_pk):
     response = render(request, 'blog/blog_detail.html', context)  # 响应
     response.set_cookie(read_cookie_key, 'true')  # 阅读cookie标记
     return response
+
+
+'''博客发表时间轴显示'''
+def blog_timeline(request):
+    context = {}
+    blogs_all_list = Blog.objects.all()
+    context['blogs'] = blogs_all_list
+    return render(request, 'blog/timeline.html', context)
+    

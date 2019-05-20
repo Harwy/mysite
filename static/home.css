@@ -5,6 +5,14 @@ h3.home-content {
     margin-bottom: 2em;
 }
 
+div.center_show {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    min-width: 20em;
+    max-width: 30em;
+}
+
 div#container {
     margin: 0 auto;
     height: 20em;
@@ -13,6 +21,24 @@ div#container {
 }
 
 div.hot-data {
-    text-align: center;
+    text-align: left;
     margin-top: 2em;
+    /* border: 1px #ccc solid; */
+    border-radius: 6px;
+    padding: 16px 1em 5px 1.5em;
+    margin-bottom: 1em;
+}
+
+.home-block-title {
+    border-bottom: 1px #ccc solid;
+    padding-bottom: 10px;
+    font-weight: bold;
+}
+
+.content-item {
+    margin-bottom: 4em;
+}
+
+.content-item-title {
+    color: #222;
 }

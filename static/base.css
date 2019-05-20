@@ -4,6 +4,7 @@
 }
 
 body {
+    background: rgb(110, 150, 235)  no-repeat fixed top;
     margin-top: 70px!important;
 }
 
@@ -14,3 +15,46 @@ ul {
 ul.navbar-right {
     margin-right: 0;
 }
+
+img {
+    vertical-align: middle;
+    border: 0;
+}
+
+.profile-img {
+    display: block;
+    width: 96px;
+    height: 96px;
+    margin: 0 auto 10px;
+}
+
+.img-circle {
+    border-radius: 50%;
+}
+
+.page-bottom {
+    width: 100%;
+    clear: both;
+    background: #e7e7e7;
+    margin-top: 2.5em;
+    padding: 1em 0 0;
+    color: #777;
+}
+
+h4 {
+    display: block;
+    margin-block-start: 1.33em;
+    margin-block-end: 1.33em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+}
+
+.page-bottom .copyright {
+    text-align: center;
+    padding: 0.5em 0;
+    margin-top: 1.5em;
+    background: #4F5893;
+    color: #e7e7e7;
+}
+

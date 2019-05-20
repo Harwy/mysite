@@ -14,42 +14,84 @@
 {% block nav_home_active %}active{% endblock %}
 
 {% block content %}
-    <h3 class="home-content">欢迎访问我的网站，随便看</h3>
-    <!-- 图表容器 DOM -->
-    <div id="container"></div>
-    <div class="hot-data">
-        <!-- 今天24小时内的热门博客 -->
-        <h3>今日热门点击</h3>
-        <ul>
-            {% for hot_data in today_hot_data %}
-                <li><a href="{% url 'blog_detail' hot_data.object_id %}">{{ hot_data.content_object.title }}</a>({{ hot_data.read_num }})</li>
-            {% empty %}
-                <li>今天暂时没有热门博客</li>
-            {% endfor %}
-        </ul>
+<div class="container">
+    <div class="row">
+        <!--第一行，展示页-->
+        <div class="col-xs-12 col-sm-10 col-sm-offset-1">
+            <!--测试：加入大屏-->
+            <div class="jumbotron">
+                <div class="center_show">
+                    <h3>这是个测试版网页，随便看</h3>
+                    <p>...</p>
+                    <p><a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a></p>
+                    
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="hot-data">
-        <!-- 昨日的热门博客 -->
-        <h3>昨日热门点击</h3>
-        <ul>
-            {% for hot_data in yesterday_hot_data %}
-                <li><a href="{% url 'blog_detail' hot_data.object_id %}">{{ hot_data.content_object.title }}</a>({{ hot_data.read_num }})</li>
-            {% empty %}
-                <li>昨天暂时没有热门博客</li>
-            {% endfor %}
-        </ul>
+    <div class="row">
+        <div class="col-xs-12 col-sm-3 col-sm-offset-1">
+            <h3 class="home-content">欢迎访问我的网站，随便看</h3>
+        </div>
+        <div class="col-xs-12 col-sm-8">
+            <!-- 图表容器 DOM -->
+            <div id="container"></div>
+        </div>
     </div>
-    <div class="hot-data">
-        <!-- 7天的热门博客 -->
-        <h3>7天热门点击</h3>
-        <ul>
-            {% for hot_data in seven_hot_data %}
-                <li><a href="{% url 'blog_detail' hot_data.id %}">{{ hot_data.title }}</a>({{ hot_data.read_num_sum }})</li>
-            {% empty %}
-                <li>昨天暂时没有热门博客</li>
-            {% endfor %}
-        </ul>
+    <div class="content-item">
+        <h3 class="content-item-title">
+            <span class="glyphicon glyphicon-pushpin"></span>
+            <span>点击榜</span>
+        </h3>
+        <div class="row">
+            <div class="col-xs-10 col-xs-offset-1 col-sm-3">
+                <div class="hot-data">
+                    <!-- 今天24小时内的热门博客 -->
+                    <h3 class="home-block-title">今日热门点击</h3>
+                    <ul>
+                        {% for hot_data in today_hot_data %}
+                            <li><a href="{% url 'blog_detail' hot_data.object_id %}">{{ hot_data.content_object.title }}</a>({{ hot_data.read_num }})</li>
+                        {% empty %}
+                            <li>今天暂时没有热门博客</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-10 col-sm-3">
+                <div class="hot-data">
+                    <!-- 昨日的热门博客 -->
+                    <h3 class="home-block-title">昨日热门点击</h3>
+                    <ul class="list">
+                        {% for hot_data in yesterday_hot_data %}
+                            <li><a href="{% url 'blog_detail' hot_data.object_id %}">{{ hot_data.content_object.title }}</a>({{ hot_data.read_num }})</li>
+                        {% empty %}
+                            <li>昨天暂时没有热门博客</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+            <div class="col-xs-10 col-sm-3">
+                <div class="hot-data">
+                    <!-- 7天的热门博客 -->
+                    <h3 class="home-block-title">7天热门点击</h3>
+                    <ul>
+                        {% for hot_data in seven_hot_data %}
+                            <li><a href="{% url 'blog_detail' hot_data.id %}">{{ hot_data.title }}</a>({{ hot_data.read_num_sum }})</li>
+                        {% empty %}
+                            <li>昨天暂时没有热门博客</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            </div>
+        </div>
+
     </div>
+    
+</div>
+    
+    
+    
+    
 
     <script>
         // 图表配置
