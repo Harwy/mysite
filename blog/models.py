@@ -8,8 +8,19 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from read_statistics.models import ReadNumExpandMethod, ReadDetail
 
 
+# 博客标签
+class BlogTag(models.Model):
+    tag_name = models.CharField(max_length=15)
+
+    def __str__(self):
+        return self.tag_name
+
+    class Meta:
+        verbose_name = '博客标签'
+        verbose_name_plural = verbose_name
 
 
+# 博客类型
 class BlogType(models.Model):
     type_name = models.CharField(max_length=15)
 
@@ -21,11 +32,15 @@ class BlogType(models.Model):
         verbose_name_plural = verbose_name
 
 
+# 博客主体
 class Blog(models.Model, ReadNumExpandMethod):  # 继承阅读计数模块下方法：get_read_num，获取当前blog阅读数
     title = models.CharField(max_length=50, verbose_name='标题')
     blog_type = models.ForeignKey(BlogType, on_delete=models.CASCADE, verbose_name='博客类别')
+    blog_tag = models.ManyToManyField(BlogTag, default=None, verbose_name='博客标签')
     content = RichTextUploadingField(verbose_name='正文')
     author = models.ForeignKey(User, on_delete=models.CASCADE, default=1, verbose_name='作者')
+    blog_cover = models.ImageField(upload_to="blog_img/%Y/%m/%d", default="blog_img/default.png", null=True, blank=True,
+                                   verbose_name='博客封面')
     read_detail = GenericRelation(ReadDetail)
     created_time = models.DateTimeField(auto_now_add=True, verbose_name='创建时间')
     last_updated_time = models.DateTimeField(auto_now=True, verbose_name='编辑时间')

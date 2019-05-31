@@ -3,6 +3,10 @@
     padding: 0;
 }
 
+html, body {
+    height: 100%;
+}
+
 body {
     background: rgb(110, 150, 235)  no-repeat fixed top;
     margin-top: 70px!important;
@@ -21,6 +25,11 @@ img {
     border: 0;
 }
 
+img.img-user {
+    width: 25px;
+    height: 25px;
+}
+
 .profile-img {
     display: block;
     width: 96px;
@@ -28,9 +37,11 @@ img {
     margin: 0 auto 10px;
 }
 
+/**
 .img-circle {
     border-radius: 50%;
 }
+**/
 
 .page-bottom {
     width: 100%;
@@ -39,6 +50,7 @@ img {
     margin-top: 2.5em;
     padding: 1em 0 0;
     color: #777;
+    bottom: 0;
 }
 
 h4 {

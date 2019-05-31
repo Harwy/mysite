@@ -1,5 +1,7 @@
 from django.urls import path
 from . import views
+from django.conf.urls.static import static
+from mysite.settings.base import MEDIA_ROOT, MEDIA_URL
 
 
 urlpatterns = [
@@ -13,4 +15,4 @@ path('login_for_medal/', views.login_for_medal, name='login_for_medal'),
     path('send_verification_code/', views.send_verification_code, name='send_verification_code'),
     path('change_password/', views.change_password, name='change_password'),
     path('forgot_password/', views.forgot_password, name='forgot_password'),
-]
+] + static(MEDIA_URL, document_root=MEDIA_ROOT) 

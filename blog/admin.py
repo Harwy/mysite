@@ -1,5 +1,11 @@
 from django.contrib import admin
-from .models import BlogType, Blog#, ReadNum
+from .models import BlogType, Blog, BlogTag
+
+
+@admin.register(BlogTag)
+class BlogTagAdmin(admin.ModelAdmin):
+    list_display = ('id', 'tag_name')
+
 
 @admin.register(BlogType)
 class BlogTypeAdmin(admin.ModelAdmin):
