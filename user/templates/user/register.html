@@ -22,7 +22,7 @@
                                     {{ field }}
                                     <p class="text-danger">{{ field.errors.as_text }}</p>
                                 {% endfor %}
-                                <span class="pull-left text-danger">{{ login_form.non_field_errors }}</span>
+                                <span class="pull-left text-danger">{{ reg_form.non_field_errors }}</span>
                                 <div class="clearfix"></div>
                                 <button id="send_code" class="btn btn-primary pull-left">发送验证码</button>
                                 <input type="submit" name="注册" class="btn btn-primary pull-right">

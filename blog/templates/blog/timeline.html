@@ -15,37 +15,30 @@
 
 {# 页面内容 #}
 {% block content %}
-{% for blog in blogs %}
-    <ul class="timeline">
-        <li>
-            <div class="time">{{ blog.created_time | date:"Y-m-d" }}</div>
-            <div class="version">{{ blog.blog_type }}</div>
-            <div class="number">第N篇文档</div>
-            <div class="content">
-                <pre>
-                        {{ blog.title }}
-                </pre>
-            </div>
-        </li>
-    </ul>
-{% empty %}
-    <h3>-- 暂无博客，敬请期待 --</h3>
-{% endfor %}
-
+<table class="table table-hover table-bordered">
+    <thead>
+        <tr>
+            <th>博客更新</th>
+            <th>更新时间</th>
+            <th>更新类型</th>
+            <th>标题</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for blog in blogs %}
+            <tr>
+                <th scope="row">第{{ blog.id }}篇文档</th>
+                <td>{{ blog.created_time | date:"Y-m-d" }}</td>
+                <td>{{ blog.blog_type }}</td>
+                <td>{{ blog.title }}</td>
+            </tr>
+        {% empty %}
+        <h3>-- 暂无博客，敬请期待 --</h3>
+        {% endfor %}    
+    </tbody>
+</table>
 
 {% endblock %}
 
 {% block script_extends %}
-<script type="text/javascript">
-    $(function() {
-        var liNodes = $('ul.timeline li'), count = liNodes.length, i, liNode;
-            for(i=0; i<count; i++) {
-          liNode = $(liNodes.get(i));
-          if(i % 2 !== 0) {
-              liNode.addClass('alt');
-          }
-          liNode.find('.number').text(count - i);
-      }
-    });
-</script>
 {% endblock %}

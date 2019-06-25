@@ -13,7 +13,7 @@ AVATAR_DEFAULT = os.path.join(AVATAR_ROOT, 'default_64.png')
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     nickname = models.CharField(max_length=20, default="", verbose_name='昵称')
-    userimg = models.ImageField(upload_to="user_img/%Y/%m/%d", null=True, blank=True, default=AVATAR_DEFAULT, verbose_name='头像')
+    userimg = models.ImageField(upload_to="user_img", null=True, blank=True, default=None, verbose_name='头像')
     # avatar = models.ImageField(upload_to=AVATAR_ROOT, default=AVATAR_DEFAULT)
 
     def __str__(self):
@@ -30,6 +30,9 @@ def get_userimg(self):
         return profile.userimg
     else:
         return AVATAR_DEFAULT
+
+def has_userimg(self):
+    return Profile.objects.filter(user=self).exists()
 
 
 # 动态绑定nickname
@@ -64,6 +67,7 @@ def get_avatar_url(self):
 '''
 
 # User.get_avatar_url = get_avatar_url
+User.has_userimg = has_userimg
 User.get_userimg = get_userimg
 User.get_nickname = get_nickname
 User.has_nickname = has_nickname

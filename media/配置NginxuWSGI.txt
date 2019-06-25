@@ -1,0 +1,124 @@
+沪南公路5088号旺铺百货批发29号
+
+ls  -ol yum*  查找当前文件夹下带yum的文件
+find / -name 'virtualenv.py'  全服务器查找文件
+ln -s /usr/local/python3/bin/virtualenv /usr/bin/virtualenv  建立软连接
+
+
+# 安装uwsgi：
+pip install uwsgi
+
+cd /home
+ln -s /usr/local/python3/bin/uwsgi /usr/bin/uwsgi  建立软连接
+
+运行uWSGI:
+uwsgi --http :8000 --wsgi-file test.py
+# uswgi运行
+uswgi --chdir /home/mysite --home /home/mysite_env/ --http :8001  --module mysite.wsgi:application  
+问题：无法渲染web
+-------------------------------------------
+
+# 安装nginx：
+1.修改yum源安装
+# yum -y install nginx
+2.下载安装包编译安装
+http://nginx.org/download/nginx-1.16.0.tar.gz
+# 解压：
+tar zxvf nginx-1.16.0.tar.gz
+# 编译安装
+./configure
+make
+make install
+# 
+ln -s /usr/local/nginx /usr/bin/nginx
+/usr/local/nginx/sbin/nginx -c /usr/local/nginx/conf/nginx.conf
+
+# 创建mysite.conf
+[mysite.conf]
+server {
+    listen 80;
+    server_name mysite;
+    charset     utf-8;
+    client_max_body_size 75M;
+    location /media  {
+        alias /home/mysite/media; 
+    }
+    location /static {
+        alias /home/mysite/static;
+    }
+
+    location / {
+        uwsgi_pass  127.0.0.1:8000;
+        include     /usr/local/nginx/uwsgi_params;
+    }
+}
+
+=========
+## 创建软连接
+=========
+ln -s /usr/local/nginx/sites-available/mysite.conf  /usr/local/nginx/sites-enabled/mysite.conf
+
+==================
+####       填写ini
+==================
+vim mysite.ini
+[uwsgi]
+chdir=/home/mysite
+home = /home/mysite_env
+module=mysite.wsgi:application
+
+master=True
+processes = 4
+harakiri=60
+max-requests=5000
+
+socket=127.0.0.1:8000
+uid = 1000
+gid = 2000
+
+pidfile=/home/mysite_uwsgi/master.pid
+daemonize=/home/mysite_uwsgi/mysite.log
+vacuum=True
+
+=================================
+####       以ini启动
+=================================
+uwsgi --ini /home/mysite_uwsgi/mysite.ini
+
+====================
+查询进程过滤选择uwsgi
+====================
+ps -aux | grep uwsgi
+
+=========
+nginx使用
+=========
+/usr/local/nginx/sbin/nginx
+
+
+=======
+修改nginx配置文件
+=======
+默认路径：
+/etc/nginx/nginx.conf
+参考文章：https://www.cnblogs.com/fuchenjie/p/8573843.html
+重启nginx：
+systemctl restart nginx
+
+git pull后顺序：
+重启服务器：reboot
+重启nginx：service nginx restart
+重启uwsgi：uwsgi --ini /home/mysite_uwsgi/mysite.ini
+uwsgi --reload /home/mysite_uwsgi/mysite.ini
+
+=========
+linux环境变量设置
+=========
+进入编辑：vim /etc/profile
+修改：export XXX=AAA
+激活：source /etc/profile
+
+设置环境变量的参数
+KEY
+EMAIL_KEY
+MYSQL_PASSWORD

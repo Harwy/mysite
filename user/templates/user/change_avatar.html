@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block title %}修改头像{% endblock %}
+{% block nav_home_active %}active{% endblock %}
+
+{% block header_extends %}
+<!--cropper-->
+<link rel="stylesheet" type="text/css" href="/static/css/cropper/cropper.min.css">
+<script src="/static/js/cropper/cropper.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<div class="col-sm-10">
+    <!--编辑区域-->
+    <div class="avatar-wrapper" id='avatar-wrapper'>
+        <img src="">
+    </div>
+</div>
+    
+<div class="col-sm-2">
+    <!--头像预览-->
+    <div class="avatar-preview"><img style="width: 96px; height: 96px;" src="/{{user.get_avatar_url}}"></div>
+    <a id="avatar-upload" href="#" class="btn btn-primary disabled">上传头像</a>
+</div>
+    
+<!--编辑相关数据-->
+<form id="avatar_form">
+    {%csrf_token%}
+    <div>
+        <input type="hidden" id="avatar_x" name="avatar_x">
+        <input type="hidden" id="avatar_y" name="avatar_y">
+        <input type="hidden" id="avatar_width" name="avatar_width">
+        <input type="hidden" id="avatar_height" name="avatar_height">
+    </div>
+</form>
+{% endblock %}
+
+{% block script_extends %}
+<script type="text/javascript">
+    $(function(){
+        //初始化裁剪器
+        var image = $('#avatar-wrapper img');
+        image.cropper({
+            checkImageOrigin: true, //检查图片来源
+            dragMode: 'move',   //图片可移动
+            restore:false,      //窗体调整大小之后不自动恢复裁剪区域
+            zoomOnWheel: false, //不允许通过鼠标滚轮缩放
+            zoomOnTouch: false, //不允许通过触摸缩放
+            aspectRatio: 1 / 1, //裁剪比例
+            autoCropArea: 0.5,  //裁剪背景透明度
+            autoCropArea: 1,    //自动裁剪的比例
+            
+            //文本的jQuery选择表达式，一个div
+            preview: $(".avatar-preview").selector,
+            crop: function (e) {
+                //返回图片编辑相关数据
+                $('#avatar_x').val(e.x);
+                $('#avatar_y').val(e.y);
+                $('#avatar_width').val(e.width);
+                $('#avatar_height').val(e.height);
+            },
+        });
+    });
+</script>
+{% endblock %}

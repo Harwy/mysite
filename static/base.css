@@ -1,15 +1,25 @@
 * {
-    margin: 0;
-    padding: 0;
+    padding:0px;
+    margin:0px;
 }
 
 html, body {
-    height: 100%;
+    padding:0px;
+    margin:0px
 }
+
+.container {
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
 
 body {
     background: rgb(110, 150, 235)  no-repeat fixed top;
-    margin-top: 70px!important;
+    padding-top: 70px;
+    padding-bottom: 30px;
 }
 
 ul {
@@ -43,6 +53,19 @@ img.img-user {
 }
 **/
 
+
+.Site {
+    display: flex;
+    display: -webkit-flex; /* Safari */
+    min-height: 100vh;
+    flex-direction: column;
+  }
+  
+  .Site-content {
+    flex: 1;
+  }
+
+
 .page-bottom {
     width: 100%;
     clear: both;
@@ -50,7 +73,23 @@ img.img-user {
     margin-top: 2.5em;
     padding: 1em 0 0;
     color: #777;
+    /*
     bottom: 0;
+    width: 100%;
+    clear: both;
+    background: #e7e7e7;
+    margin-top: 2.5em;
+    color: #777;
+    **/
+}
+
+.page-bottom .title {
+    color: #424242;
+    font-weight: bold;
+    border-bottom: 1px solid #aaa;
+    padding-bottom: 7px;
+    margin-bottom: 1em;
+    margin-top: 1em;
 }
 
 h4 {
@@ -70,3 +109,30 @@ h4 {
     color: #e7e7e7;
 }
 
+
+/*头像编辑*/
+.avatar-wrapper {
+    height: 370px;
+    width: 100%;
+    margin-top: 15px;
+    box-shadow: inset 0 0 5px rgba(0,0,0,.25);
+    background-color: #fcfcfc;
+    overflow: hidden;
+  }
+   
+  .avatar-wrapper img { display: block; height: auto; max-width: 100%;}
+   
+  /*头像预览*/
+  .avatar-preview {
+    margin-top: 15px;
+    margin-right: 15px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+    background-color: #fff;
+    overflow: hidden;
+    height: 96px;
+    width: 96px;
+  }
+   
+  .avatar-preview:hover { border-color: #ccf; box-shadow: 0 0 5px rgba(0,0,0,.15);}
+  

@@ -205,3 +205,9 @@ def forgot_password(request):
     context['form'] = form
     context['return_back_url'] = redirect_to
     return render(request, 'user/forgot_password.html', context)
+
+
+'''修改头像'''
+def change_user_avatar(request):
+    """修改头像页面"""
+    pass
